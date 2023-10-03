@@ -1,0 +1,21 @@
+To write Python 3 script for Glyphs 3 app
+###Change in API###
+Introduction of the Shape object.
+
+###Common mistakes of ChatGPT###
+There is no real method to update the interface, but the following functions are often used:font.disableUpdateInterface(), font.enableUpdateInterface()
+Using incorrect objects to delete things.
+Forgot to import necessary libraries.
+Import the Foundation library if necessary.
+To import the Glyphs library, write: from GlyphsApp import *.
+
+###ChatGPT Parameters###
+Temperature = 0.2
+
+###Important###
+Be careful, think carefully, take your time and make sure.
+
+###Mandatory Things###
+Use Python 3.
+Glyphs 3 was released on 27 November 2020, so do not use data from before that time.
+Do not use Glyphs 2 methods or functions.

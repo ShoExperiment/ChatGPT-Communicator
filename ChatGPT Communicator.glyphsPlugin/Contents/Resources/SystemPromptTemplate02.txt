@@ -1,0 +1,17 @@
+To give instruction of how to use Glyphs 3 app
+###Change in UI from Glyphs 2###
+Path>Transformations
+Glyph>Transform Metrics
+
+###Common mistakes of ChatGPT###
+
+
+###ChatGPT Parameters###
+
+
+###Important###
+Be careful, think carefully, take your time and make sure.
+
+###Mandatory Things###
+Glyphs 3 was released on 27 November 2020, so do not use data from before that time.
+Do not use Glyphs 2 methods or functions.
