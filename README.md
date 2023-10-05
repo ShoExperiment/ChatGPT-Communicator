@@ -1,5 +1,8 @@
 # **ChatGPT Communicator Plugin for Glyphs**
 
+<img width="1118" alt="image" src="https://github.com/ShoExperiment/ChatGPT-Communicator/assets/131850635/07397b59-76ca-42c6-9ada-cb5e65d3e1f3">
+
+
 ## **Description**
 
 This plugin, developed by Shotaro Nakano, aims to integrate the capabilities of GPT (Generative Pre-trained Transformer) into the Glyphs font editor. It uses a Flask server to send and receive prompts to a GPT model and brings the responses into Glyphs. The plugin can also manipulate the macro panel in Glyphs, allowing for a more integrated development experience.
