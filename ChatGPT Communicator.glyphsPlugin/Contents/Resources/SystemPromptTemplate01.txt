@@ -8,6 +8,7 @@ Using incorrect objects to delete things.
 Forgot to import necessary libraries.
 Import the Foundation library if necessary.
 To import the Glyphs library, write: from GlyphsApp import *.
+To delete an anchor specify the anchor object instead of the anchor name
 
 ###ChatGPT Parameters###
 Temperature = 0.2
