@@ -38,7 +38,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 	systemPromptPupupButton = objc.IBOutlet()
 
 	#Response
-	responceText = objc.IBOutlet()
+	responseText = objc.IBOutlet()
 
 	#User Prompt
 	userPromptText = objc.IBOutlet()
@@ -77,7 +77,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 	#History/Itaration
 	HistoryIterationPupupButton = objc.IBOutlet()
 
-	#Include responce to prompt checkbutton
+	#Include Response to prompt checkbutton
 	includeReponceToPromptCheckButtom = objc.IBOutlet()
 
 	#Defalt Setting of Parameter
@@ -99,7 +99,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.userPromptTemplate_02", "Tell me how to use Glyphs 3 App: ")
 	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.userPromptTemplate_03", "")
 
-	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.responce", "")
+	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.Response", "")
 	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.userPrompt", "You are a helpful assistant.")
  
  	#History
@@ -108,11 +108,11 @@ class ChatGPTCommunicator(GeneralPlugin):
 	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist2", "")
 	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist3", "")
 	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist4", "")
-	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.responce_Hist0", "")
-	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.responce_Hist1", "")
-	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.responce_Hist2", "")
-	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.responce_Hist3", "")
-	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.responce_Hist4", "")
+	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.Response_Hist0", "")
+	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.Response_Hist1", "")
+	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.Response_Hist2", "")
+	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.Response_Hist3", "")
+	Glyphs.registerDefault("com.ShotaroNakano.ChatGPTCommunicator.Response_Hist4", "")
 
 	#Error message after an excution of a code
 	error_message = ""
@@ -135,7 +135,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 	#On dialog show
 	@objc.python_method
 	def start(self):
-		self.responceText.setAutomaticQuoteSubstitutionEnabled_(False)
+		self.responseText.setAutomaticQuoteSubstitutionEnabled_(False)
 		self.clearHistory()
 		self.initiateParameters()
 		self.loadTemplates()
@@ -149,9 +149,9 @@ class ChatGPTCommunicator(GeneralPlugin):
 
 	def clearHistory(self):
 		for i in reversed(range(0, 5)):
-			#Clear user prompts and responces
+			#Clear user prompts and Responses
 			Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i}"] = ""
-			Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i}"] = ""
+			Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i}"] = ""
 
 	def initiateParameters(self):
 		#Initialize
@@ -217,13 +217,13 @@ class ChatGPTCommunicator(GeneralPlugin):
 			file_url = openPanel.URLs()[0]
 			file_path = file_url.path()
 
-		#Read the file and put its contents into responceText
+		#Read the file and put its contents into responseText
 		try:
 			with open(file_path, 'r', encoding='utf-8') as f:
 				file_content = f.read()
 
 			#Get the NSTextStorage object from the NSTextView
-			text_storage = self.responceText.textStorage()
+			text_storage = self.responseText.textStorage()
 			#Clear any existing text
 			text_storage.deleteCharactersInRange_((0, text_storage.length()))
 			#Insert new text
@@ -237,7 +237,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 	@objc.IBAction
 	def setTitleTemplate_(self, sender):
 		# Get the NSTextStorage object from the NSTextView
-		text_storage = self.responceText.textStorage()
+		text_storage = self.responseText.textStorage()
 
 		#Create the title code string
 		title_code = "#MenuTitle: The script title\n# -*- coding: utf-8 -*-\n__doc__ = \"\"\"\nWrite descriptions here.\n\"\"\"\n"
@@ -252,8 +252,8 @@ class ChatGPTCommunicator(GeneralPlugin):
  	#Save the newly made script
 	@objc.IBAction
 	def savePythonFile_(self, sender):
-		#Fetch the text from responceText NSTextView
-		text_storage = self.responceText.textStorage()
+		#Fetch the text from responseText NSTextView
+		text_storage = self.responseText.textStorage()
 		text_to_save = text_storage.string()
 
 		#Create and configure the save panel
@@ -463,16 +463,16 @@ class ChatGPTCommunicator(GeneralPlugin):
 
 		return response.get("response", "No response received.")
 
-	#Shift history down by one index for both userPrompt and responce
+	#Shift history down by one index for both userPrompt and Response
 	def update_history(self, promptLatest):
 		#Move history backwards
 		for i in reversed(range(1, 5)):
 			Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i}"] = Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i - 1}"]
-			Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i}"] = Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i - 1}"]
+			Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i}"] = Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i - 1}"]
 
 		#Set the newest data
 		Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist0"] = promptLatest
-		Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.responce_Hist0"] = Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.response"]
+		Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.Response_Hist0"] = Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.response"]
 
 	#Construct Messages
 	def construct_messages(self):
@@ -485,14 +485,14 @@ class ChatGPTCommunicator(GeneralPlugin):
 			for i in range(2, -1, -1):
 				if Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i}"]:
 					messages.append({"role": "user", "content": Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i}"]})
-				if Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i}"]:
-					messages.append({"role": "assistant", "content": Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i}"]})
+				if Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i}"]:
+					messages.append({"role": "assistant", "content": Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i}"]})
 		elif selected_history == 2:  # Option for 5
 			for i in range(4, -1, -1):
 				if Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i}"]:
 					messages.append({"role": "user", "content": Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.userPrompt_Hist{i}"]})
-				if Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i}"]:
-					messages.append({"role": "assistant", "content": Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.responce_Hist{i}"]})
+				if Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i}"]:
+					messages.append({"role": "assistant", "content": Glyphs.defaults[f"com.ShotaroNakano.ChatGPTCommunicator.Response_Hist{i}"]})
 		return messages
 
 	#Fetch from GPT
@@ -515,19 +515,19 @@ class ChatGPTCommunicator(GeneralPlugin):
 		
 		#Compose final prompt
 		heckbox_state = self.includeReponceToPromptCheckButtom.state()
-		text_in_responce = self.responceText.string()
+		text_in_Response = self.responseText.string()
 
 		if i:
 			if i[0]>=1:#not to include preface for auto pilot
  				user_prompt = "\n\n" + user_prompt_imputed
 			else:
 				if heckbox_state:
-					user_prompt =  text_in_responce + "\n\n" + user_prompt_template + "\n\n" + user_prompt_imputed
+					user_prompt =  text_in_Response + "\n\n" + user_prompt_template + "\n\n" + user_prompt_imputed
 				else:
 					user_prompt =  user_prompt_template + "\n\n" + user_prompt_imputed
 		else:
 			if heckbox_state:
-				user_prompt =  text_in_responce + "\n\n" + user_prompt_template + "\n\n" + user_prompt_imputed
+				user_prompt =  text_in_Response + "\n\n" + user_prompt_template + "\n\n" + user_prompt_imputed
 			else:
 				user_prompt =  user_prompt_template + "\n\n" + user_prompt_imputed
   
@@ -548,13 +548,13 @@ class ChatGPTCommunicator(GeneralPlugin):
 
 
 		#Get the NSTextStorage object from the NSTextView
-		text_storage = self.responceText.textStorage()
+		text_storage = self.responseText.textStorage()
 		#Clear any existing text
 		text_storage.deleteCharactersInRange_((0, text_storage.length()))
 		#Set new text from defaults
-		new_responce_text = Glyphs.defaults['com.ShotaroNakano.ChatGPTCommunicator.response']
-		text_storage.appendAttributedString_(NSAttributedString.alloc().initWithString_(new_responce_text))
-		#self.responceText.setStringValue_(Glyphs.defaults['com.ShotaroNakano.ChatGPTCommunicator.response'])
+		new_Response_text = Glyphs.defaults['com.ShotaroNakano.ChatGPTCommunicator.response']
+		text_storage.appendAttributedString_(NSAttributedString.alloc().initWithString_(new_Response_text))
+		#self.responseText.setStringValue_(Glyphs.defaults['com.ShotaroNakano.ChatGPTCommunicator.response'])
         
 	#History / Iteration
 	@objc.IBAction
@@ -575,7 +575,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 
 	#Button To Macro
 	@objc.IBAction
-	def sendResponceToMacro_(self, sender):
+	def sendResponseToMacro_(self, sender):
 		#Tab object
 		macroViewControllers = NSApp.delegate().macroPanelController().tabBarControl().tabItems()
 		#To find the current tab
@@ -585,7 +585,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 		selectedTab = tabBarControl.selectionIndex()
 
 		#The text you want to set
-		row_text = self.responceText.string()
+		row_text = self.responseText.string()
 		code_text = self.extractPython_(row_text)
 
 		#Set the new text
@@ -607,7 +607,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 		print("content_macro", content_macro)
 
 		#Get the NSTextStorage object from the NSTextView
-		text_storage = self.responceText.textStorage()
+		text_storage = self.responseText.textStorage()
 		#Clear any existing text
 		text_storage.deleteCharactersInRange_((0, text_storage.length()))
 		#Set new text from defaults
@@ -638,7 +638,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 				# If there is no error, break out of the loop
 				break
     
-	#Extract python code from the text in Responce
+	#Extract python code from the text in Response
 	def extractPython_(self, row_text):
 
 		code_text = row_text
@@ -656,8 +656,8 @@ class ChatGPTCommunicator(GeneralPlugin):
 	#Run the Python Code
 	@objc.IBAction
 	def run_(self, sender):
-		#Fetch text from responceText (assuming it's a NSTextView)
-		row_text = self.responceText.string()  # Replace with the appropriate method to get text
+		#Fetch text from responseText (assuming it's a NSTextView)
+		row_text = self.responseText.string()  # Replace with the appropriate method to get text
 
 		code_text = self.extractPython_(row_text)
 
@@ -668,6 +668,12 @@ class ChatGPTCommunicator(GeneralPlugin):
 		except Exception as e:
 			self.error_message = str(e)
 			print(f"An error occurred while executing the code: {e}")
+			Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.userPrompt"] = self.error_message
+			text_storage = self.userPromptText.textStorage()
+			# Clear existing text
+			text_storage.deleteCharactersInRange_((0, text_storage.length()))
+			# Update the user prompt in the UI
+			text_storage.appendAttributedString_(NSAttributedString.alloc().initWithString_(self.error_message))
 
 	@objc.python_method
 	def __file__(self):
