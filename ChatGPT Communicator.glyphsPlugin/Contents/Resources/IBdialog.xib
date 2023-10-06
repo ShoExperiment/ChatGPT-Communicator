@@ -17,7 +17,7 @@
                 <outlet property="modelSelected" destination="4s3-yE-aXf" id="bP7-9K-b06"/>
                 <outlet property="presencePenaltySlider" destination="QPK-bf-k7B" id="skD-om-8a4"/>
                 <outlet property="presencePenaltyText" destination="QFX-MP-Rfy" id="MLD-AL-kMl"/>
-                <outlet property="responceText" destination="gma-xx-SWX" id="elw-t4-I0b"/>
+                <outlet property="responseText" destination="gma-xx-SWX" id="6jY-Hg-Geb"/>
                 <outlet property="systemPromptPupupButton" destination="G7c-dM-WBA" id="Ogj-va-2iG"/>
                 <outlet property="systemPromptText" destination="g1J-3G-egP" id="1yf-q1-ixJ"/>
                 <outlet property="temperatureSlider" destination="ghu-LX-u95" id="j7O-0W-DAG"/>
@@ -251,7 +251,7 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ekq-6z-Rqz">
                         <rect key="frame" x="17" y="541" width="64" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Responce" id="MOn-rd-c9V">
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Response" id="MOn-rd-c9V">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -408,9 +408,9 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xN0-iy-fFH">
-                        <rect key="frame" x="17" y="177" width="293" height="18"/>
+                        <rect key="frame" x="17" y="177" width="292" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="check" title="Include texts in Responce field into Prompt. " bezelStyle="regularSquare" imagePosition="left" inset="2" id="a4d-aZ-khB">
+                        <buttonCell key="cell" type="check" title="Include texts in Response field into Prompt. " bezelStyle="regularSquare" imagePosition="left" inset="2" id="a4d-aZ-khB">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -423,7 +423,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="sendResponceToMacro:" target="-2" id="dlv-0U-3XY"/>
+                            <action selector="sendResponseToMacro:" target="-2" id="pLp-tO-gCb"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5qd-Vn-JyU">
