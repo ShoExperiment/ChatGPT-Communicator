@@ -328,9 +328,8 @@ class ChatGPTCommunicator(GeneralPlugin):
 
 
 		#Get the selected index from the popup button
-		#selected_index = self.modelSelected.indexOfSelectedItem()
-		selected_index = int(Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.historyIteration"])
- 
+		selected_index = self.modelSelected.indexOfSelectedItem()
+		
 		#Initialize the selected model variable
 		selected_model = None
  
@@ -339,7 +338,7 @@ class ChatGPTCommunicator(GeneralPlugin):
 			selected_model = "gpt-3.5-turbo"
 			Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.modelSelection"] = selected_model
 		elif selected_index == 1:
-			selected_model = "gpt-4"
+			selected_model = "gpt-4-1106-preview"
 			Glyphs.defaults["com.ShotaroNakano.ChatGPTCommunicator.modelSelection"] = selected_model
 		elif selected_index == 2:
 			# Read from 'YourModelName.txt' and get the model

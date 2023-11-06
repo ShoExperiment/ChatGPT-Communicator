@@ -109,7 +109,7 @@
                             <menu key="menu" id="DQ7-zj-ouR">
                                 <items>
                                     <menuItem title="GPT-3.5-Turbo" state="on" id="dGN-JF-dqR"/>
-                                    <menuItem title="GPT-4" id="3qm-xG-WRx"/>
+                                    <menuItem title="gpt-4-1106-preview" id="3qm-xG-WRx"/>
                                     <menuItem title="Your Model" id="YIN-o3-YJP"/>
                                 </items>
                             </menu>
