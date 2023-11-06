@@ -1,6 +1,6 @@
 # **ChatGPT Communicator Plugin for Glyphs**
 
-<img width="1118" alt="image" src="https://github.com/ShoExperiment/ChatGPT-Communicator/assets/131850635/07397b59-76ca-42c6-9ada-cb5e65d3e1f3">
+<img width="1235" alt="image" src="https://github.com/ShoExperiment/ChatGPT-Communicator/assets/131850635/53ddb4c5-d032-41c9-ac6f-a2571d2d34db">
 
 
 ## **Description**
